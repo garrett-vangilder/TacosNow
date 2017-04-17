@@ -7,8 +7,17 @@
 </ion-header>
 
 <ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+  <ion-row *ngIf='locationIsSet'>
+        <ion-col>
+          <sebm-google-map
+            [latitude]='locationInfo.coords.latitude'
+            [longitude]='locationInfo.coords.longitude'
+            [zoom]='14'
+            >
+            <sebm-google-map-marker
+              [latitude]='locationInfo.coords.latitude'
+              [longitude]='locationInfo.coords.longitude'></sebm-google-map-marker>
+          </sebm-google-map>
+        </ion-col>
+      </ion-row>
 </ion-content>
