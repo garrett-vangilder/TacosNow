@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, LoadingController, ToastController } from 'ionic-angular';
 import { Geolocation, Geoposition } from '@ionic-native/geolocation';
+import { ShopsService } from '../../services/shops';
 
 
 @Component({
@@ -10,10 +11,12 @@ import { Geolocation, Geoposition } from '@ionic-native/geolocation';
 export class HomePage {
   locationInfo: Geoposition;
   locationIsSet: boolean = false;
+  shops: any;
   constructor(public navCtrl: NavController,
               private loadingCtrl: LoadingController,
               private geolocation: Geolocation,
-              private toastController: ToastController) {
+              private toastController: ToastController,
+              private shopService: ShopsService) {
   }
 
   ionViewWillEnter() {
@@ -31,11 +34,12 @@ export class HomePage {
           loader.dismiss()
           this.locationInfo = location;
           this.locationIsSet = true;
-          console.log(this.locationInfo);
+          this.getShops(this.locationInfo)
         }
       )
       .catch(
         error => {
+          console.log(error);
           const toast = this.toastController.create({
             message: 'Could not get location, please search manually',
             duration: 2500
@@ -43,6 +47,12 @@ export class HomePage {
           toast.present();
         }
       );
+  }
+
+  private getShops(location) {
+    console.log('getting shops');
+    this.shopService.loadShops(location)
+      .then((data) => console.log(data))
   }
 
 }

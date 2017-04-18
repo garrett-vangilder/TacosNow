@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpModule, JsonpModule } from "@angular/http";
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -9,6 +10,7 @@ import { APIKeys } from './keys.ts';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
+import { ShopsService } from '../services/shops';
 
 @NgModule({
   declarations: [
@@ -17,6 +19,8 @@ import { HomePage } from '../pages/home/home';
   ],
   imports: [
     BrowserModule,
+    HttpModule,
+    JsonpModule,
     IonicModule.forRoot(MyApp),
     AgmCoreModule.forRoot({
       apiKey: APIKeys.googleMaps
@@ -31,6 +35,8 @@ import { HomePage } from '../pages/home/home';
     StatusBar,
     SplashScreen,
     Geolocation,
+    ShopsService,
+    APIKeys,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
