@@ -1,7 +1,7 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Ionic Blank
+      TacosNow
     </ion-title>
   </ion-navbar>
 </ion-header>
@@ -16,16 +16,18 @@
             >
             <sebm-google-map-marker
               [latitude]='locationInfo.coords.latitude'
-              [longitude]='locationInfo.coords.longitude'
-              style='color:blue;'></sebm-google-map-marker>
+              [longitude]='locationInfo.coords.longitude'></sebm-google-map-marker>
             <sebm-google-map-marker
               *ngFor='let shop of shops; let i = index;'
               [latitude]='shop.location.lat'
               [longitude]='shop.location.lng'
               [title]='shop.name'
               [iconUrl]='shop.icon'>
-                <sebm-google-map-info-window [disableAutoPan]="true">
+                <sebm-google-map-info-window text-center [disableAutoPan]="true">
                   <h5>{{ shop.name }}</h5>
+                  <button ion-button 
+                          outline block 
+                          (click)='openShopDetail(i)'>More Info</button>
                 </sebm-google-map-info-window>
               </sebm-google-map-marker>
           </sebm-google-map>
