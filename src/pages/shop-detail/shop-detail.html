@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{ shop.name }}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-grid>
+    <ion-row>
+      <ion-col text-center>
+        <h2>{{ shop.name }}</h2>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col text-center>
+        <sebm-google-map
+        [latitude]='shop.location.lat'
+        [longitude]='shop.location.lng'
+        [zoom]='14'>
+        <sebm-google-map-marker
+          [latitude]='shop.location.lat'
+          [longitude]='shop.location.lng'></sebm-google-map-marker>
+        </sebm-google-map>
+    </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

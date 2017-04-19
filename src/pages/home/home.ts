@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, LoadingController, ToastController } from 'ionic-angular';
 import { Geolocation, Geoposition } from '@ionic-native/geolocation';
 import { ShopsService } from '../../services/shops';
+import { ShopDetailPage } from '../shop-detail/shop-detail';
 
 
 @Component({
@@ -16,8 +17,7 @@ export class HomePage {
               private loadingCtrl: LoadingController,
               private geolocation: Geolocation,
               private toastController: ToastController,
-              private shopService: ShopsService) {
-  }
+              private shopService: ShopsService) {}
 
   ionViewWillEnter() {
     this.getLocation()
@@ -51,21 +51,18 @@ export class HomePage {
   private getShops(location) {
     this.shopService.loadShops(location)
       .then((data) => {
-        console.log(data);
         data.map((shop) => {
           let shopToAdd:any = {};
           shopToAdd.location = shop.geometry.location;
           shopToAdd.name = shop.name;
           shopToAdd.icon = shop.icon;
-          console.log(shopToAdd)
           this.shops.push(shopToAdd)
         })
       })
-      .then(() => console.log(this.shops))
   }
-
-  public openInfo(index) {
-    console.log(this.shops[index])
+  private openShopDetail(index: number) {
+    const shop = this.shops[index];
+    this.navCtrl.push(ShopDetailPage, { shop })
   }
 
 }

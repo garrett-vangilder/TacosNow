@@ -11,11 +11,13 @@ import { APIKeys } from './keys.ts';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { ShopsService } from '../services/shops';
+import { ShopDetailPage } from '../pages/shop-detail/shop-detail';
 
 @NgModule({
   declarations: [
     MyApp,
-    HomePage
+    HomePage,
+    ShopDetailPage
   ],
   imports: [
     BrowserModule,
@@ -29,7 +31,8 @@ import { ShopsService } from '../services/shops';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage
+    HomePage,
+    ShopDetailPage
   ],
   providers: [
     StatusBar,
