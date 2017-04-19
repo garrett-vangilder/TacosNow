@@ -51,15 +51,21 @@ export class HomePage {
   private getShops(location) {
     this.shopService.loadShops(location)
       .then((data) => {
+        console.log(data);
         data.map((shop) => {
           let shopToAdd:any = {};
-          shopToAdd.location = shop.geometry.location
-          shopToAdd.name = shop.name
+          shopToAdd.location = shop.geometry.location;
+          shopToAdd.name = shop.name;
+          shopToAdd.icon = shop.icon;
           console.log(shopToAdd)
           this.shops.push(shopToAdd)
         })
       })
       .then(() => console.log(this.shops))
+  }
+
+  public openInfo(index) {
+    console.log(this.shops[index])
   }
 
 }
