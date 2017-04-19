@@ -17,6 +17,10 @@
             <sebm-google-map-marker
               [latitude]='locationInfo.coords.latitude'
               [longitude]='locationInfo.coords.longitude'></sebm-google-map-marker>
+            <sebm-google-map-marker
+              *ngFor='let shop of shops; let i = index;'
+              [latitude]='shop.location.lat'
+              [longitude]='shop.location.lng'></sebm-google-map-marker>
           </sebm-google-map>
         </ion-col>
       </ion-row>

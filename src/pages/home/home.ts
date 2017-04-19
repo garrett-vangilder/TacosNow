@@ -10,8 +10,8 @@ import { ShopsService } from '../../services/shops';
 })
 export class HomePage {
   locationInfo: Geoposition;
+  shops: any[] = [];
   locationIsSet: boolean = false;
-  shops: any;
   constructor(public navCtrl: NavController,
               private loadingCtrl: LoadingController,
               private geolocation: Geolocation,
@@ -39,7 +39,6 @@ export class HomePage {
       )
       .catch(
         error => {
-          console.log(error);
           const toast = this.toastController.create({
             message: 'Could not get location, please search manually',
             duration: 2500
@@ -50,9 +49,17 @@ export class HomePage {
   }
 
   private getShops(location) {
-    console.log('getting shops');
     this.shopService.loadShops(location)
-      .then((data) => console.log(data))
+      .then((data) => {
+        data.map((shop) => {
+          let shopToAdd:any = {};
+          shopToAdd.location = shop.geometry.location
+          shopToAdd.name = shop.name
+          console.log(shopToAdd)
+          this.shops.push(shopToAdd)
+        })
+      })
+      .then(() => console.log(this.shops))
   }
 
 }
